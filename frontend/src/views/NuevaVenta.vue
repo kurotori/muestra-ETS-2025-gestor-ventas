@@ -11,7 +11,7 @@ import Encabezado from '../components/base/Encabezado.vue';
             bg-fondo-030
             flex justify-center items-center">
         <div class="contenido
-                w-9/12 h-9/10
+                w-9/12 h-fit
                 rounded-3xl
                 p-5
                 bg-fondo-060
@@ -27,7 +27,20 @@ import Encabezado from '../components/base/Encabezado.vue';
                     bg-white
                     rounded-2xl
                     detalle">
-
+                <div class="btnAgregarProd
+                        w-[20vw] h-[5vh]
+                        rounded-2xl
+                        border-black border-2
+                        text-center
+                        m-1.5
+                        hover:bg-black hover:text-white
+                        
+                        ">
+                    <span class="material-symbols-outlined h-2.5 ">
+                        add
+                    </span>
+                    <span class="h-full inline-block align-middle">Agregar Producto</span> 
+                </div>
             </div>
 
         </div>
