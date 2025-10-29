@@ -19,6 +19,17 @@ import Encabezado from '../components/base/Encabezado.vue';
             <h2 class="border-b border-b-black">
                 Nueva Venta
             </h2>
+
+            <div class="
+                    w-full h-9/10
+                    mt-2.5
+                    border border-fondo-100
+                    bg-white
+                    rounded-2xl
+                    detalle">
+
+            </div>
+
         </div>
     </div>
 </template>
