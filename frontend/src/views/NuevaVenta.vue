@@ -1,7 +1,20 @@
 <script setup>
+import { ref, reactive } from 'vue';
 import Cuerpo from '../components/base/Cuerpo.vue';
 import Encabezado from '../components/base/Encabezado.vue';
+import ProductoVenta from '../components/venta/ProductoVenta.vue';
 
+const carrito = ref([])
+
+const agregarAlCarrito = () => {
+    carrito.value.push(
+        {
+            id: '',
+            cant: ''
+        }
+    )
+    console.log(carrito.value.length)
+}
 
 </script>
 
@@ -27,11 +40,21 @@ import Encabezado from '../components/base/Encabezado.vue';
                     bg-white
                     rounded-2xl
                     ">
-                <div class="detalleProductos">
-                    <div class="botoneraDetalleProductos
-                            border-black border-b-1
+                <div class="detalleProductos
+                        ">
+                    <div class="listaDetalleProductos
+                            h-fit
+                            py-[10px]
+                            flex flex-col items-center
                             ">
-                        <div class="btnAgregarProd
+                        <div v-for="producto in carrito" class="carrito 
+                                w-95/100">
+                            <ProductoVenta></ProductoVenta>
+                        </div>
+                    </div>
+                    <div class="botoneraDetalleProductos
+                            ">
+                        <div @click="agregarAlCarrito()" class="btnAgregarProd
                                 relative
                                 flex justify-between items-center
                                 w-[20vw] h-[5vh]
@@ -52,9 +75,6 @@ import Encabezado from '../components/base/Encabezado.vue';
                                 Agregar Producto
                             </span>
                         </div>
-                    </div>
-                    <div class="listaDetalleProductos">
-
                     </div>
                 </div>
 
