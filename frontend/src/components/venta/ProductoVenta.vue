@@ -14,7 +14,7 @@ const productos = ref([
     }
 ])
 
-const productoSel = ref('')
+const productoSel = ref(0)
 </script>
 
 <template>
@@ -27,7 +27,7 @@ const productoSel = ref('')
             <option v-for="producto in productos" :value="producto.id">{{ producto.nombre }}</option>
         </select>
         <input type="number" id="cantidad" class="">
-        <span>{{ productos[productoSel].nombre }}</span>
+        <span>{{ productos[productoSel].precio }}</span>
         <span>0</span>
     </div>
 </template>

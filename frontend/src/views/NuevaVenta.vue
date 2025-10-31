@@ -47,6 +47,15 @@ const agregarAlCarrito = () => {
                             py-[10px]
                             flex flex-col items-center
                             ">
+                        <div class="datosProducto
+                                w-full h-fit
+                                grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)] gap-1.5 
+                            ">
+                            <span>Producto</span>
+                            <span>Cantidad</span>
+                            <span>Precio</span>
+                            <span>SubTotal</span>
+                        </div>
                         <div v-for="producto in carrito" class="carrito 
                                 w-95/100">
                             <ProductoVenta></ProductoVenta>
@@ -84,3 +93,9 @@ const agregarAlCarrito = () => {
         </div>
     </div>
 </template>
+
+<style scoped>
+.datosProducto>span {
+    text-align: center;
+}
+</style>
