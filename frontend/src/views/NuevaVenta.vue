@@ -21,9 +21,9 @@ const agregarAlCarrito = () => {
 }
 
 function obtenerSubtotal(valor, idElemento) {
-    console.log("recibido",valor, "de", idElemento)
+    //console.log("recibido",valor, "de", idElemento)
     carrito.productos[idElemento] = valor
-    console.log("objeto ", carrito.productos[idElemento])
+    //console.log("objeto ", carrito.productos[idElemento])
     calcularTotal()
 }
 
@@ -79,7 +79,8 @@ const calcularTotal = () => {
 
                         <div class="carrito 
                                 w-95/100" @change="calcularTotal()">
-                            <ProductoVenta v-for="producto in carrito.productos" @enviar-valores="obtenerSubtotal($event,producto.id)" :key="producto.id">
+                            <ProductoVenta v-for="producto in carrito.productos"
+                                @enviar-valores="obtenerSubtotal($event, producto.id)" :key="producto.id">
                                 <!-- // v-model="producto.subtotal"> */ -->
                             </ProductoVenta>
                         </div>
@@ -142,5 +143,4 @@ const calcularTotal = () => {
 .carrito>div:nth-child(even) {
     background-color: rgb(186, 203, 228);
 }
-
 </style>

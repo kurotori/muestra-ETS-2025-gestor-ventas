@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --color-encabezado: #e5bb0f;
 
-  --color-encabezado: #d28405;
-  
   --color-objetoA-100: #05d21e;
   --color-objetoA-090: #1ed735;
   --color-objetoA-080: #37db4b;
@@ -13,7 +12,6 @@
   --color-objetoA-030: #9beda5;
   --color-objetoA-020: #b4f2bc;
   --color-objetoA-010: #cdf6d2;
-
 
   --color-objetoB-100: #d21e05;
   --color-objetoB-090: #d7351e;
@@ -31,10 +29,9 @@
   --color-fondo-060: #9bbaed;
 
   --color-fondo-100: #0553d2;
-  
 }
 
-button{
+button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -58,15 +55,14 @@ h1 {
   line-height: 1.1;
 }
 
-h2{
+h2 {
   font-size: 1.8em;
   font-weight: bold;
   line-height: 1.1;
-
 }
 
 .moneda::before {
-    content: '$U ';
+  content: "$U ";
 }
 
 /* 

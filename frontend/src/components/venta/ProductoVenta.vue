@@ -2,7 +2,8 @@
 import { ref, reactive } from 'vue';
 
 const emit = defineEmits([
-    'enviarValores'
+    'enviarValores',
+    'quitar'
 ])
 
 function enviarValores() {
@@ -44,7 +45,7 @@ const cambioProd = () => {
 <template>
     <div class="datosProducto
             w-full h-fit
-            grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)] gap-1.5 
+            grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)_50px] gap-1.5 
 
             ">
         <select v-model="detalle.id" name="producto" id="producto" class="" @change="cambioProd()">
@@ -55,6 +56,11 @@ const cambioProd = () => {
         <span class="subtotal moneda font-bold">
             {{ detalle.subtotal }}
         </span>
+        <div class="quitar">
+            <span class="material-symbols-outlined">
+                minimize
+            </span>
+        </div>
     </div>
 </template>
 
