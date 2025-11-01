@@ -1,5 +1,21 @@
 <script setup>
-import { ref } from 'vue';
+import { re, reactive } from 'vue';
+
+const emit = defineEmits([
+    'enviarValores'
+])
+
+function enviarValores() {
+    emit('enviarValores', detalle)
+}
+
+const detalle = reactive(
+    {
+        id: 0,
+        cantidad: 0,
+        subtotal: 0
+    }
+)
 
 const productos = ref([
     {
@@ -15,6 +31,13 @@ const productos = ref([
 ])
 
 const productoSel = ref(0)
+const prodCantidad = ref(0)
+const prodSubTotal = defineModel()//ref(0)
+
+const cambioProd = () => {
+    detalle.subtotal = detalle.cantidad * productos.value[detalle.id].precio
+    //console.log(productos.value[productoSel.value].precio)
+}
 </script>
 
 <template>
@@ -23,12 +46,14 @@ const productoSel = ref(0)
             grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)] gap-1.5 
 
             ">
-        <select v-model="productoSel" name="producto" id="producto" class="">
+        <select v-model="detalle.id" name="producto" id="producto" class="" @change="cambioProd()">
             <option v-for="producto in productos" :value="producto.id">{{ producto.nombre }}</option>
         </select>
-        <input type="number" id="cantidad" class="">
-        <span>{{ productos[productoSel].precio }}</span>
-        <span>0</span>
+        <input type="number" id="cantidad" class="cantidad" value="0" v-model="detalle.cantidad" @change="cambioProd()">
+        <span class="precio">{{ productos[detalle.id].precio }}</span>
+        <span class="subtotal font-bold">
+            {{ detalle.subtotal }}
+        </span>
     </div>
 </template>
 

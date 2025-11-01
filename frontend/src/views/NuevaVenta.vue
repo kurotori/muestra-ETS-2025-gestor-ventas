@@ -4,16 +4,33 @@ import Cuerpo from '../components/base/Cuerpo.vue';
 import Encabezado from '../components/base/Encabezado.vue';
 import ProductoVenta from '../components/venta/ProductoVenta.vue';
 
-const carrito = ref([])
+const carrito = reactive({
+    productos: [],
+    total: 0
+})
 
 const agregarAlCarrito = () => {
-    carrito.value.push(
+    carrito.productos.push(
         {
-            id: '',
-            cant: ''
+            id: carrito.productos.length,
+            cant: 0,
+            subtotal: 0
         }
     )
-    console.log(carrito.value.length)
+    console.log(carrito.value)
+}
+
+function obtenerSubtotal(valor) {
+
+}
+
+const calcularTotal = () => {
+    carrito.total = 0
+    carrito.productos.forEach(producto => {
+        console.log(producto.subtotal)
+        carrito.total += producto.subtotal
+    });
+    //console.log(total)
 }
 
 </script>
@@ -44,28 +61,33 @@ const agregarAlCarrito = () => {
                         ">
                     <div class="listaDetalleProductos
                             h-fit
-                            py-[10px]
+                            py-2.5
                             flex flex-col items-center
                             ">
                         <div class="datosProducto
-                                w-full h-fit
+                                w-95/100 h-fit
                                 grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)] gap-1.5 
                             ">
-                            <span>Producto</span>
+                            <span class="font-bold">Producto</span>
                             <span>Cantidad</span>
                             <span>Precio</span>
-                            <span>SubTotal</span>
+                            <span class="font-bold text-orange-500">SubTotal</span>
                         </div>
-                        <div v-for="producto in carrito" class="carrito 
-                                w-95/100">
-                            <ProductoVenta></ProductoVenta>
+
+                        <div class="carrito 
+                                w-95/100" @change="calcularTotal()">
+                            <ProductoVenta v-for="producto in carrito.productos" @enviar-valores="" :key="producto.id">
+                                <!-- // v-model="producto.subtotal"> */ -->
+                            </ProductoVenta>
                         </div>
+
+
                     </div>
                     <div class="botoneraDetalleProductos
                             ">
                         <div @click="agregarAlCarrito()" class="btnAgregarProd
                                 relative
-                                flex justify-between items-center
+                                flex justify-around items-center
                                 w-[20vw] h-[5vh]
                                 rounded-2xl
                                 border-black border-2
@@ -85,6 +107,19 @@ const agregarAlCarrito = () => {
                             </span>
                         </div>
                     </div>
+                    <div class="pieDetalleProductos
+                            flex justify-end
+                            h-[5vh] w-95/100
+                            mx-[2.5%]
+                            ">
+                        <span class="total
+                                w-1/5
+                                border-t-2 border-t-black
+                                font-bold text-2xl text-center
+                                ">
+                            {{ carrito.total }}
+                        </span>
+                    </div>
                 </div>
 
 
@@ -92,10 +127,20 @@ const agregarAlCarrito = () => {
 
         </div>
     </div>
+    <a @click="calcularTotal()">actualizar</a>
 </template>
 
 <style scoped>
 .datosProducto>span {
     text-align: center;
+    border-bottom: 1px solid grey;
+}
+
+.carrito>div:nth-child(odd) {
+    background-color: rgb(186, 203, 228);
+}
+
+.total::before {
+    content: '$U';
 }
 </style>
