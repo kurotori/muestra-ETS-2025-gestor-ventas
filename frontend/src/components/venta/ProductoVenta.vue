@@ -1,5 +1,5 @@
 <script setup>
-import { re, reactive } from 'vue';
+import { ref, reactive } from 'vue';
 
 const emit = defineEmits([
     'enviarValores'
@@ -37,6 +37,7 @@ const prodSubTotal = defineModel()//ref(0)
 const cambioProd = () => {
     detalle.subtotal = detalle.cantidad * productos.value[detalle.id].precio
     //console.log(productos.value[productoSel.value].precio)
+    enviarValores()
 }
 </script>
 
@@ -50,8 +51,8 @@ const cambioProd = () => {
             <option v-for="producto in productos" :value="producto.id">{{ producto.nombre }}</option>
         </select>
         <input type="number" id="cantidad" class="cantidad" value="0" v-model="detalle.cantidad" @change="cambioProd()">
-        <span class="precio">{{ productos[detalle.id].precio }}</span>
-        <span class="subtotal font-bold">
+        <span class="precio moneda">{{ productos[detalle.id].precio }}</span>
+        <span class="subtotal moneda font-bold">
             {{ detalle.subtotal }}
         </span>
     </div>

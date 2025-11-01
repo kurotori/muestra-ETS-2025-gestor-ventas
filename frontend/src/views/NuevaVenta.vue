@@ -13,15 +13,18 @@ const agregarAlCarrito = () => {
     carrito.productos.push(
         {
             id: carrito.productos.length,
-            cant: 0,
+            cantidad: 0,
             subtotal: 0
         }
     )
     console.log(carrito.value)
 }
 
-function obtenerSubtotal(valor) {
-
+function obtenerSubtotal(valor, idElemento) {
+    console.log("recibido",valor, "de", idElemento)
+    carrito.productos[idElemento] = valor
+    console.log("objeto ", carrito.productos[idElemento])
+    calcularTotal()
 }
 
 const calcularTotal = () => {
@@ -76,7 +79,7 @@ const calcularTotal = () => {
 
                         <div class="carrito 
                                 w-95/100" @change="calcularTotal()">
-                            <ProductoVenta v-for="producto in carrito.productos" @enviar-valores="" :key="producto.id">
+                            <ProductoVenta v-for="producto in carrito.productos" @enviar-valores="obtenerSubtotal($event,producto.id)" :key="producto.id">
                                 <!-- // v-model="producto.subtotal"> */ -->
                             </ProductoVenta>
                         </div>
@@ -112,7 +115,7 @@ const calcularTotal = () => {
                             h-[5vh] w-95/100
                             mx-[2.5%]
                             ">
-                        <span class="total
+                        <span class="total moneda
                                 w-1/5
                                 border-t-2 border-t-black
                                 font-bold text-2xl text-center
@@ -136,11 +139,8 @@ const calcularTotal = () => {
     border-bottom: 1px solid grey;
 }
 
-.carrito>div:nth-child(odd) {
+.carrito>div:nth-child(even) {
     background-color: rgb(186, 203, 228);
 }
 
-.total::before {
-    content: '$U';
-}
 </style>
