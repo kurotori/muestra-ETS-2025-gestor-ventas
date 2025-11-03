@@ -9,14 +9,27 @@ const carrito = reactive({
     total: 0
 })
 
+const producto = reactive({
+    id: 0,
+    nombre: '',
+    cantidad: 0,
+    precio: 0,
+    subtotal: 0
+})
+
 const agregarAlCarrito = () => {
-    carrito.productos.push(
-        {
-            id: carrito.productos.length,
-            cantidad: 0,
-            subtotal: 0
-        }
-    )
+    const prodNuevo = {
+        id: carrito.productos.length,
+        producto_id: producto.id,
+        cantidad: producto.cantidad,
+        precio: producto.precio,
+        subtotal: 0
+    }
+
+    prodNuevo.subtotal = prodNuevo.cantidad * prodNuevo.precio
+
+    carrito.productos.push(prodNuevo)
+
     console.log(carrito.value)
 }
 
@@ -27,6 +40,10 @@ function obtenerSubtotal(valor, idElemento) {
     calcularTotal()
 }
 
+function quitarProducto(idElemento){
+
+}
+
 const calcularTotal = () => {
     carrito.total = 0
     carrito.productos.forEach(producto => {
@@ -35,6 +52,19 @@ const calcularTotal = () => {
     });
     //console.log(total)
 }
+
+const productos = ref([
+    {
+        id: 0,
+        nombre: 'Cubre webcam',
+        precio: 50
+    },
+    {
+        id: 1,
+        nombre: 'Mini catapulta',
+        precio: 150
+    }
+])
 
 </script>
 
@@ -69,7 +99,7 @@ const calcularTotal = () => {
                             ">
                         <div class="datosProducto
                                 w-95/100 h-fit
-                                grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)] gap-1.5 
+                                grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)_50px] gap-1.5 
                             ">
                             <span class="font-bold">Producto</span>
                             <span>Cantidad</span>
@@ -77,10 +107,24 @@ const calcularTotal = () => {
                             <span class="font-bold text-orange-500">SubTotal</span>
                         </div>
 
+                        <div class="datosProducto
+                                w-95/100 h-fit
+                                grid grid-cols-[minmax(150px,2fr)_minmax(50px,1fr)_minmax(50px,1fr)_minmax(50px,1fr)_50px] gap-1.5 
+                            ">
+                            <select name="producto" id="producto" v-model="producto.id" class="text-center" @change="cambioProd()">
+                                <option v-for="prod in productos" :value="prod.id">{{ prod.nombre }}</option>
+                            </select>
+                            <input type="number" id="cantidad" class="cantidad text-center" v-model="producto.cantidad" value="0">
+                            <span class="precio moneda">{{ productos[producto.id].precio}}</span>
+                            <span class="subtotal moneda font-bold">
+                                {{ producto.  }}
+                            </span>
+        
+                        </div>
                         <div class="carrito 
                                 w-95/100" @change="calcularTotal()">
                             <ProductoVenta v-for="producto in carrito.productos"
-                                @enviar-valores="obtenerSubtotal($event, producto.id)" :key="producto.id">
+                                :key="producto.id">
                                 <!-- // v-model="producto.subtotal"> */ -->
                             </ProductoVenta>
                         </div>
